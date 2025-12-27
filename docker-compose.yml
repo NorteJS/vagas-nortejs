@@ -12,7 +12,7 @@ services:
       - MYSQL_USER=usernortejs
       - MYSQL_PASSWORD=passwordnortejs
     volumes:
-    # volume_name:container_path
+      # volume_name:container_path
       - mysql-data:/var/lib/mysql
       - ./docker/mysql/init:/docker-entrypoint-initdb.d
     # Lê-se assim:
@@ -21,4 +21,4 @@ services:
 
 volumes:
   mysql-data:
-  # "Docker, cria (ou reutiliza) um volume com esse nome." 
+  # "Docker, cria (ou reutiliza) um volume com esse nome."

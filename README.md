@@ -35,10 +35,12 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 Installing dependencies
+
 ```bash
 pnpm install prisma @types/node --save-dev \
 pnpm install @prisma/client @prisma/adapter-mariadb dotenv
 ```
+
 --save-dev === usado para instalar um pacote como uma dependência de desenvolvimento
 
 ## Prisma Migrate (MySQL) - Shadow DB
@@ -48,13 +50,16 @@ Se o prisma migrate dev reclamar que não consegue criar o shadow database (P301
 Este projeto usa a env SHADOW_DATABASE_URL (veja o arquivo .env) apontando para o banco vagas_nortejs_shadow.
 
 Opção A (automático, volume novo):
+
 - O docker-compose monta a pasta docker/mysql/init no docker-entrypoint-initdb.d
 - O script docker/mysql/init/01-shadow.sql cria o banco vagas_nortejs_shadow e concede permissões
 - Observação: scripts de init só rodam quando o volume do MySQL é criado pela primeira vez
 
 Opção B (sem recriar volume):
-1) chmod +x scripts/mysql-shadow.sh
-2) ./scripts/mysql-shadow.sh
+
+1. chmod +x scripts/mysql-shadow.sh
+2. ./scripts/mysql-shadow.sh
 
 Depois rode:
-1) npx prisma migrate dev
+
+1. npx prisma migrate dev
