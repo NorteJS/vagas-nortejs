@@ -1,10 +1,12 @@
 import { PrismaClient, Prisma } from '@/prisma/generated/client';
 import { PrismaMariaDb } from '@prisma/adapter-mariadb';
-let prismaJob: Prisma.JobCreateInput;
 
-const adapter = new PrismaMariaDb({
-  connectionString: process.env.DATABASE_URL as string || '',
-} as any)
+const databaseUrl = process.env.DATABASE_URL;
+if (!databaseUrl) {
+  throw new Error('DATABASE_URL is missing');
+}
+
+const adapter = new PrismaMariaDb(databaseUrl);
 
 const prismaClientSingleton = () => {
   return new PrismaClient({

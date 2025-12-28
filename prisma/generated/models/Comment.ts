@@ -228,6 +228,7 @@ export type CommentWhereInput = {
   content?: Prisma.StringFilter<"Comment"> | string
   created_at?: Prisma.DateTimeFilter<"Comment"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Comment"> | Date | string
+  job?: Prisma.XOR<Prisma.JobScalarRelationFilter, Prisma.JobWhereInput>
 }
 
 export type CommentOrderByWithRelationInput = {
@@ -237,6 +238,7 @@ export type CommentOrderByWithRelationInput = {
   content?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  job?: Prisma.JobOrderByWithRelationInput
   _relevance?: Prisma.CommentOrderByRelevanceInput
 }
 
@@ -250,6 +252,7 @@ export type CommentWhereUniqueInput = Prisma.AtLeast<{
   content?: Prisma.StringFilter<"Comment"> | string
   created_at?: Prisma.DateTimeFilter<"Comment"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Comment"> | Date | string
+  job?: Prisma.XOR<Prisma.JobScalarRelationFilter, Prisma.JobWhereInput>
 }, "id">
 
 export type CommentOrderByWithAggregationInput = {
@@ -279,11 +282,11 @@ export type CommentScalarWhereWithAggregatesInput = {
 }
 
 export type CommentCreateInput = {
-  jobId: number
   author: string
   content: string
   created_at?: Date | string
   updated_at?: Date | string
+  job: Prisma.JobCreateNestedOneWithoutCommentsInput
 }
 
 export type CommentUncheckedCreateInput = {
@@ -296,11 +299,11 @@ export type CommentUncheckedCreateInput = {
 }
 
 export type CommentUpdateInput = {
-  jobId?: Prisma.IntFieldUpdateOperationsInput | number
   author?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  job?: Prisma.JobUpdateOneRequiredWithoutCommentsNestedInput
 }
 
 export type CommentUncheckedUpdateInput = {
@@ -322,7 +325,6 @@ export type CommentCreateManyInput = {
 }
 
 export type CommentUpdateManyMutationInput = {
-  jobId?: Prisma.IntFieldUpdateOperationsInput | number
   author?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -336,6 +338,16 @@ export type CommentUncheckedUpdateManyInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type CommentListRelationFilter = {
+  every?: Prisma.CommentWhereInput
+  some?: Prisma.CommentWhereInput
+  none?: Prisma.CommentWhereInput
+}
+
+export type CommentOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type CommentOrderByRelevanceInput = {
@@ -381,6 +393,132 @@ export type CommentSumOrderByAggregateInput = {
   jobId?: Prisma.SortOrder
 }
 
+export type CommentCreateNestedManyWithoutJobInput = {
+  create?: Prisma.XOR<Prisma.CommentCreateWithoutJobInput, Prisma.CommentUncheckedCreateWithoutJobInput> | Prisma.CommentCreateWithoutJobInput[] | Prisma.CommentUncheckedCreateWithoutJobInput[]
+  connectOrCreate?: Prisma.CommentCreateOrConnectWithoutJobInput | Prisma.CommentCreateOrConnectWithoutJobInput[]
+  createMany?: Prisma.CommentCreateManyJobInputEnvelope
+  connect?: Prisma.CommentWhereUniqueInput | Prisma.CommentWhereUniqueInput[]
+}
+
+export type CommentUncheckedCreateNestedManyWithoutJobInput = {
+  create?: Prisma.XOR<Prisma.CommentCreateWithoutJobInput, Prisma.CommentUncheckedCreateWithoutJobInput> | Prisma.CommentCreateWithoutJobInput[] | Prisma.CommentUncheckedCreateWithoutJobInput[]
+  connectOrCreate?: Prisma.CommentCreateOrConnectWithoutJobInput | Prisma.CommentCreateOrConnectWithoutJobInput[]
+  createMany?: Prisma.CommentCreateManyJobInputEnvelope
+  connect?: Prisma.CommentWhereUniqueInput | Prisma.CommentWhereUniqueInput[]
+}
+
+export type CommentUpdateManyWithoutJobNestedInput = {
+  create?: Prisma.XOR<Prisma.CommentCreateWithoutJobInput, Prisma.CommentUncheckedCreateWithoutJobInput> | Prisma.CommentCreateWithoutJobInput[] | Prisma.CommentUncheckedCreateWithoutJobInput[]
+  connectOrCreate?: Prisma.CommentCreateOrConnectWithoutJobInput | Prisma.CommentCreateOrConnectWithoutJobInput[]
+  upsert?: Prisma.CommentUpsertWithWhereUniqueWithoutJobInput | Prisma.CommentUpsertWithWhereUniqueWithoutJobInput[]
+  createMany?: Prisma.CommentCreateManyJobInputEnvelope
+  set?: Prisma.CommentWhereUniqueInput | Prisma.CommentWhereUniqueInput[]
+  disconnect?: Prisma.CommentWhereUniqueInput | Prisma.CommentWhereUniqueInput[]
+  delete?: Prisma.CommentWhereUniqueInput | Prisma.CommentWhereUniqueInput[]
+  connect?: Prisma.CommentWhereUniqueInput | Prisma.CommentWhereUniqueInput[]
+  update?: Prisma.CommentUpdateWithWhereUniqueWithoutJobInput | Prisma.CommentUpdateWithWhereUniqueWithoutJobInput[]
+  updateMany?: Prisma.CommentUpdateManyWithWhereWithoutJobInput | Prisma.CommentUpdateManyWithWhereWithoutJobInput[]
+  deleteMany?: Prisma.CommentScalarWhereInput | Prisma.CommentScalarWhereInput[]
+}
+
+export type CommentUncheckedUpdateManyWithoutJobNestedInput = {
+  create?: Prisma.XOR<Prisma.CommentCreateWithoutJobInput, Prisma.CommentUncheckedCreateWithoutJobInput> | Prisma.CommentCreateWithoutJobInput[] | Prisma.CommentUncheckedCreateWithoutJobInput[]
+  connectOrCreate?: Prisma.CommentCreateOrConnectWithoutJobInput | Prisma.CommentCreateOrConnectWithoutJobInput[]
+  upsert?: Prisma.CommentUpsertWithWhereUniqueWithoutJobInput | Prisma.CommentUpsertWithWhereUniqueWithoutJobInput[]
+  createMany?: Prisma.CommentCreateManyJobInputEnvelope
+  set?: Prisma.CommentWhereUniqueInput | Prisma.CommentWhereUniqueInput[]
+  disconnect?: Prisma.CommentWhereUniqueInput | Prisma.CommentWhereUniqueInput[]
+  delete?: Prisma.CommentWhereUniqueInput | Prisma.CommentWhereUniqueInput[]
+  connect?: Prisma.CommentWhereUniqueInput | Prisma.CommentWhereUniqueInput[]
+  update?: Prisma.CommentUpdateWithWhereUniqueWithoutJobInput | Prisma.CommentUpdateWithWhereUniqueWithoutJobInput[]
+  updateMany?: Prisma.CommentUpdateManyWithWhereWithoutJobInput | Prisma.CommentUpdateManyWithWhereWithoutJobInput[]
+  deleteMany?: Prisma.CommentScalarWhereInput | Prisma.CommentScalarWhereInput[]
+}
+
+export type CommentCreateWithoutJobInput = {
+  author: string
+  content: string
+  created_at?: Date | string
+  updated_at?: Date | string
+}
+
+export type CommentUncheckedCreateWithoutJobInput = {
+  id?: number
+  author: string
+  content: string
+  created_at?: Date | string
+  updated_at?: Date | string
+}
+
+export type CommentCreateOrConnectWithoutJobInput = {
+  where: Prisma.CommentWhereUniqueInput
+  create: Prisma.XOR<Prisma.CommentCreateWithoutJobInput, Prisma.CommentUncheckedCreateWithoutJobInput>
+}
+
+export type CommentCreateManyJobInputEnvelope = {
+  data: Prisma.CommentCreateManyJobInput | Prisma.CommentCreateManyJobInput[]
+  skipDuplicates?: boolean
+}
+
+export type CommentUpsertWithWhereUniqueWithoutJobInput = {
+  where: Prisma.CommentWhereUniqueInput
+  update: Prisma.XOR<Prisma.CommentUpdateWithoutJobInput, Prisma.CommentUncheckedUpdateWithoutJobInput>
+  create: Prisma.XOR<Prisma.CommentCreateWithoutJobInput, Prisma.CommentUncheckedCreateWithoutJobInput>
+}
+
+export type CommentUpdateWithWhereUniqueWithoutJobInput = {
+  where: Prisma.CommentWhereUniqueInput
+  data: Prisma.XOR<Prisma.CommentUpdateWithoutJobInput, Prisma.CommentUncheckedUpdateWithoutJobInput>
+}
+
+export type CommentUpdateManyWithWhereWithoutJobInput = {
+  where: Prisma.CommentScalarWhereInput
+  data: Prisma.XOR<Prisma.CommentUpdateManyMutationInput, Prisma.CommentUncheckedUpdateManyWithoutJobInput>
+}
+
+export type CommentScalarWhereInput = {
+  AND?: Prisma.CommentScalarWhereInput | Prisma.CommentScalarWhereInput[]
+  OR?: Prisma.CommentScalarWhereInput[]
+  NOT?: Prisma.CommentScalarWhereInput | Prisma.CommentScalarWhereInput[]
+  id?: Prisma.IntFilter<"Comment"> | number
+  jobId?: Prisma.IntFilter<"Comment"> | number
+  author?: Prisma.StringFilter<"Comment"> | string
+  content?: Prisma.StringFilter<"Comment"> | string
+  created_at?: Prisma.DateTimeFilter<"Comment"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"Comment"> | Date | string
+}
+
+export type CommentCreateManyJobInput = {
+  id?: number
+  author: string
+  content: string
+  created_at?: Date | string
+  updated_at?: Date | string
+}
+
+export type CommentUpdateWithoutJobInput = {
+  author?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type CommentUncheckedUpdateWithoutJobInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  author?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type CommentUncheckedUpdateManyWithoutJobInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  author?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 
 
 export type CommentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -390,6 +528,7 @@ export type CommentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   content?: boolean
   created_at?: boolean
   updated_at?: boolean
+  job?: boolean | Prisma.JobDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["comment"]>
 
 
@@ -404,10 +543,15 @@ export type CommentSelectScalar = {
 }
 
 export type CommentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "jobId" | "author" | "content" | "created_at" | "updated_at", ExtArgs["result"]["comment"]>
+export type CommentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  job?: boolean | Prisma.JobDefaultArgs<ExtArgs>
+}
 
 export type $CommentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Comment"
-  objects: {}
+  objects: {
+    job: Prisma.$JobPayload<ExtArgs>
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     jobId: number
@@ -755,6 +899,7 @@ readonly fields: CommentFieldRefs;
  */
 export interface Prisma__CommentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  job<T extends Prisma.JobDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.JobDefaultArgs<ExtArgs>>): Prisma.Prisma__JobClient<runtime.Types.Result.GetResult<Prisma.$JobPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -807,6 +952,10 @@ export type CommentFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.CommentOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CommentInclude<ExtArgs> | null
+  /**
    * Filter, which Comment to fetch.
    */
   where: Prisma.CommentWhereUniqueInput
@@ -825,6 +974,10 @@ export type CommentFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extension
    */
   omit?: Prisma.CommentOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CommentInclude<ExtArgs> | null
+  /**
    * Filter, which Comment to fetch.
    */
   where: Prisma.CommentWhereUniqueInput
@@ -842,6 +995,10 @@ export type CommentFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the Comment
    */
   omit?: Prisma.CommentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CommentInclude<ExtArgs> | null
   /**
    * Filter, which Comment to fetch.
    */
@@ -891,6 +1048,10 @@ export type CommentFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions
    */
   omit?: Prisma.CommentOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CommentInclude<ExtArgs> | null
+  /**
    * Filter, which Comment to fetch.
    */
   where?: Prisma.CommentWhereInput
@@ -939,6 +1100,10 @@ export type CommentFindManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    */
   omit?: Prisma.CommentOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CommentInclude<ExtArgs> | null
+  /**
    * Filter, which Comments to fetch.
    */
   where?: Prisma.CommentWhereInput
@@ -982,6 +1147,10 @@ export type CommentCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   omit?: Prisma.CommentOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CommentInclude<ExtArgs> | null
+  /**
    * The data needed to create a Comment.
    */
   data: Prisma.XOR<Prisma.CommentCreateInput, Prisma.CommentUncheckedCreateInput>
@@ -1010,6 +1179,10 @@ export type CommentUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the Comment
    */
   omit?: Prisma.CommentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CommentInclude<ExtArgs> | null
   /**
    * The data needed to update a Comment.
    */
@@ -1051,6 +1224,10 @@ export type CommentUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   omit?: Prisma.CommentOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CommentInclude<ExtArgs> | null
+  /**
    * The filter to search for the Comment to update in case it exists.
    */
   where: Prisma.CommentWhereUniqueInput
@@ -1076,6 +1253,10 @@ export type CommentDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the Comment
    */
   omit?: Prisma.CommentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CommentInclude<ExtArgs> | null
   /**
    * Filter which Comment to delete.
    */
@@ -1108,4 +1289,8 @@ export type CommentDefaultArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Comment
    */
   omit?: Prisma.CommentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CommentInclude<ExtArgs> | null
 }

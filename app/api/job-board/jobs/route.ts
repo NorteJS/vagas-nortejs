@@ -1,66 +1,73 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import prisma, { Prisma } from '@/lib/db';
-import zod from 'zod';
+import { NextResponse } from 'next/server';
+import prisma from '@/lib/db';
+import { createJobSchema } from './schema-jobs';
+import { PER_PAGE, buildLinks, currentPageFunction, lastPageFunction, parseListQuery, readBody, skipFunction, sleep, toFunction } from './jobs-utils';
 
-const createJobSchema = zod.object({
-  title: zod.string().min(3),
-  description: zod.string().min(10),
-  company: zod.string().min(2),
-  city: zod.string().min(1),
-  state: zod.string().min(1),
-  company_website: zod.url(),
-})
+export async function GET(request: Request) {
+  const url = new URL(request.url);
+  const { search, page, slow } = parseListQuery(url);
 
+  if (slow) await sleep(1500);
 
-interface JobParams {
-  // ?id=1&search=programador
-  id: string;
-  searchParams: { [key: string]: string | string[] | undefined };
-  page: string;
-}
+  const where = search
+    ? {
+        OR: [
+          { title: { contains: search, mode: 'insensitive' as const } },
+          { company: { contains: search, mode: 'insensitive' as const } },
+          { city: { contains: search, mode: 'insensitive' as const } },
+        ],
+      }
+    : undefined;
 
-// /api/job-board/[id]/route.ts
-// /api/jobs/?id=1&search=programador
-export async function GET(
-  request: NextApiRequest,
-  { params }: { params: JobParams }
-) {
-  const jobId = Number(params.id);
+  const total = await prisma.job.count({ where });
+  const lastPage = lastPageFunction(total)
+  const currentPage = currentPageFunction(page, lastPage);
+  const skip = skipFunction(currentPage);
 
-  // SELECT * FROM jobs WHERE id = jobId AND published = true
-  const job = await prisma.job.findUnique({
-    where: { id: jobId, published: true },
+  const jobs = await prisma.job.findMany({
+    where,
+    orderBy: { created_at: 'desc' },
+    skip,
+    take: PER_PAGE,
   });
 
-  if (!job) {
-    return new Response(JSON.stringify({ message: 'Job not found' }), { status: 404 });
-  }
-
-  return new Response(JSON.stringify(job), { status: 200 });
-}
-export async function POST(
-  request: Request extends
-    zod.infer<typeof createJobSchema> ?
-    zod.infer<typeof createJobSchema> : Request,
-) {
-  const { title, company, description, city, state, company_website }: zod.infer<typeof createJobSchema> = await request.json();
-  let jobs: Prisma.JobCreateInput;
-  // if (!title) {
-  jobs = {
-    title,
-    company,
-    description,
-    city,
-    company_website,
-    state,
-    created_at: new Date(),
-    updated_at: new Date(),
-  }
-
-
-  const created = await prisma.job.create({
+  return NextResponse.json({
     data: jobs,
+    links: buildLinks(url, lastPage, currentPage),
+    meta: {
+      current_page: currentPage,
+      from: total === 0 ? null : skip + 1,
+      last_page: lastPage,
+      path: `${url.origin}${url.pathname}`,
+      per_page: PER_PAGE,
+      to: total === 0 ? null : toFunction(total, skip),
+      total,
+    },
   });
+}
 
-  return new Response(JSON.stringify(created), { status: 201 });
+export async function POST(request: Request) {
+  try {
+    const body = await readBody(request);
+    const data = createJobSchema.parse(body);
+
+    const created = await prisma.job.create({
+      data: {
+        title: data.title,
+        company: data.company,
+        company_website: data.company_website,
+        city: data.city,
+        state: data.state,
+        schedule: data.schedule,
+        salary: data.salary,
+        description: data.description,
+        requirements: data.requirements,
+      },
+    });
+
+    return NextResponse.json({ data: created }, { status: 201 });
+  } catch (err: any) {
+    const message = err?.errors ? err.errors : err?.message || 'Validation error';
+    return NextResponse.json({ message }, { status: 422 });
+  }
 }

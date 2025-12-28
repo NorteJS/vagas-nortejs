@@ -79,6 +79,9 @@ export const JobScalarFieldEnum = {
   company_website: 'company_website',
   city: 'city',
   state: 'state',
+  schedule: 'schedule',
+  salary: 'salary',
+  requirements: 'requirements',
   created_at: 'created_at',
   updated_at: 'updated_at'
 } as const
@@ -112,7 +115,9 @@ export const JobOrderByRelevanceFieldEnum = {
   company: 'company',
   company_website: 'company_website',
   city: 'city',
-  state: 'state'
+  state: 'state',
+  schedule: 'schedule',
+  requirements: 'requirements'
 } as const
 
 export type JobOrderByRelevanceFieldEnum = (typeof JobOrderByRelevanceFieldEnum)[keyof typeof JobOrderByRelevanceFieldEnum]
