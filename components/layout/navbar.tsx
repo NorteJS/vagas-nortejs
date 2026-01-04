@@ -1,5 +1,4 @@
 "use client"
-import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import LogoSvgComponent from '../logo';
@@ -11,7 +10,7 @@ export default function Navbar() {
     pathname === href || (href !== '/' && pathname?.startsWith(href ?? ''))
 
   return (
-    <nav className="flex justify-between p-4 w-full max-w-7xl mx-auto items-center border-b border-gray-200 mb-8">
+    <nav className="flex justify-between p-4 w-full max-w-7xl mx-auto items-center mb-2">
       <div>
         {/* <Image src="/logo/logo-default.svg" alt="Logo NorteJS" width={180} height={120} /> */}
         <LogoSvgComponent bg="light" />

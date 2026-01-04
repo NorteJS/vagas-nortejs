@@ -30,7 +30,6 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Divider line abaixo do conteúdo do footer */}
       <div className="max-w-7xl mx-auto border-t border-gray-800 mt-4" />
     </footer>
   )

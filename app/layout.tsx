@@ -22,8 +22,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Vagas NorteJS",
-  description: "Plataforma de vagas de emprego para desenvolvedores JavaScript no Norte do Brasil",
+  title: "VagasNorteJs",
+  description:
+    "O VagasNorteJs conecta candidatos a empregos ideais, oferecendo funcionalidades intuitivas para busca e gerenciamento de vagas.",
 };
 
 export default function RootLayout({
@@ -39,8 +40,7 @@ export default function RootLayout({
       >
         <Navbar />
 
-        {/* main ocupa o espaço restante para empurrar o footer para baixo */}
-        <main className="flex-1 w-full max-w-7xl mx-auto p-4">{children}</main>
+        <main className="flex-1">{children}</main>
 
         <Footer />
       </body>

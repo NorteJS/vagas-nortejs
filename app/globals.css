@@ -3,7 +3,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* --font-maven: 'Maven Pro', sans-serif; */
+  --font-maven: 'Maven Pro', sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
