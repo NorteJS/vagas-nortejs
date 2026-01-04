@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import homeImage from "@/public/background/home.svg"
+import homeImage from "@/public/background/about.png"
 import Image from "next/image";
 
 export default function Home() {
@@ -14,7 +14,7 @@ export default function Home() {
       <Image
         src={homeImage}
         alt="Ilustração de pessoas"
-        className="mx-auto mt-12"
+        className="mx-auto mt-12 w-130"
       />
     </section>
   );

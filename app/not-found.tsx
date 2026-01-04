@@ -1,6 +1,7 @@
 "use client"
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
+import notFoundImage from '@/public/background/not-found.png';
 import { useRouter } from 'next/navigation';
 
 export default function NotFound() {
@@ -21,7 +22,7 @@ export default function NotFound() {
           onClick={() => router.back()}
           className="cursor-pointer">Voltar</Button>
       </div>
-      <Image src="/background/not-found.svg" alt="Not Found"  width={500} height={300} />
+      <Image src={notFoundImage} alt="Not Found"  width={500} height={300} />
     </div>
   )
 }

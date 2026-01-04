@@ -1,4 +1,4 @@
-import aboutImage from "@/public/background/about.svg"
+import aboutImage from "@/public/background/about.png"
 import Image from "next/image"
 
 export default function Sobre() {

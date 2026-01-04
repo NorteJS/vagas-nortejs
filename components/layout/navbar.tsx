@@ -6,8 +6,7 @@ import { cn } from '@/lib/utils';
 
 export default function Navbar() {
   const pathname = usePathname();
-  const isActive = (href: string) =>
-    pathname === href || (href !== '/' && pathname?.startsWith(href ?? ''))
+  const isActive = (href: string) => pathname === href;
 
   return (
     <nav className="flex justify-between p-4 w-full max-w-7xl mx-auto items-center mb-2">
@@ -21,7 +20,7 @@ export default function Navbar() {
           <Link href="/" className={cn(
             "hover:font-medium ease-in-out duration-300",
             isActive('/') && 'font-medium')
-            }>
+          }>
             Home
           </Link>
           {isActive('/') && <div className="border-b-[3px] border-blue-400/90 rounded-2xl" />}
@@ -38,8 +37,8 @@ export default function Navbar() {
         </li>
 
         <li>
-          <Link href="/cadastrar-vagas" className={`hover:font-medium ease-in-out duration-300  ${isActive('/cadastrar-vagas') ? 'font-medium' : ''}`}>Cadastrar Vagas</Link>
-          {isActive('/cadastrar-vagas') && <div className="border-b-[3px] border-blue-400/90 rounded-2xl" />}
+          <Link href="/vagas/cadastro" className={`hover:font-medium ease-in-out duration-300  ${isActive('/vagas/cadastro') ? 'font-medium' : ''}`}>Cadastrar Vagas</Link>
+          {isActive('/vagas/cadastro') && <div className="border-b-[3px] border-blue-400/90 rounded-2xl" />}
         </li>
       </ul>
     </nav >
