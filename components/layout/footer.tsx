@@ -4,7 +4,7 @@ import Link from 'next/link'
 import LogoSvgComponent from '../logo'
 export default function Footer() {
   return (
-    <footer className="bg-black mt-8 pt-6 pb-8">
+    <footer className="bg-black  pt-6 pb-8">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center p-4 gap-4 max-w-7xl mx-auto">
         <div className="flex flex-row items-center space-x-5">
           {/* <Image
