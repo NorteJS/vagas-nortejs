@@ -134,7 +134,7 @@ export default function Cadastro() {
               <Textarea
                 id="description"
                 name="description"
-                className="min-h-[100px] border-gray-400 focus:border-gray-500"
+                className="min-h-25 border-gray-400 focus:border-gray-500"
                 minLength={10}
                 required
               />
@@ -149,7 +149,7 @@ export default function Cadastro() {
               <Textarea
                 id="requirements"
                 name="requirements"
-                className="min-h-[100px] border-gray-400 focus:border-gray-500"
+                className="min-h-25 border-gray-400 focus:border-gray-500"
                 required
               />
             </FormItem>
