@@ -16,7 +16,7 @@ export async function deleteJob(formData: FormData) {
   if (!res.ok) {
     throw new Error("Failed to delete job");
   }
-
+   
   redirect("/vagas");
 }
 
